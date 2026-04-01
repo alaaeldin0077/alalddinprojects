@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aladdin for Project Management | علاء الدين لإدارة المشروعات</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2D5A27;
+    --primary-light: #3A7D32;
+    --primary-dark: #1E3D1A;
+    --accent: #C8A96E;
+    --accent-light: #E8D5A8;
+    --earth: #8B6F47;
+    --earth-light: #D4C4A8;
+    --bg: #FAFAF5;
+    --bg-cream: #F5F0E8;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #7A7A7A;
+    --white: #FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(45,90,39,0.06);
+    --shadow-md: 0 8px 30px rgba(45,90,39,0.1);
+    --shadow-lg: 0 20px 60px rgba(45,90,39,0.12);
+    --radius: 16px;
+    --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  [dir="rtl"] body,
+  [dir="rtl"] .nav-links a,
+  [dir="rtl"] .btn,
+  [dir="rtl"] p,
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3,
+  [dir="rtl"] .service-card,
+  [dir="rtl"] .stat-item,
+  [dir="rtl"] .footer-col,
+  [dir="rtl"] input, [dir="rtl"] textarea {
+    font-family: 'Noto Kufi Arabic', 'DM Sans', sans-serif;
+  }
+
+  /* ===================== NAVBAR ===================== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(250,250,245,0.85);
+    border-bottom: 1px solid rgba(45,90,39,0.08);
+    transition: var(--transition);
+  }
+
+  .navbar.scrolled {
+    padding: 12px 5%;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--primary);
+  }
+
+  .logo-banner {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-text .ar-name {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-light);
+    display: block;
+    margin-top: -2px;
+  }
+
+  .nav-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+    background: rgba(45,90,39,0.06);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    background: var(--bg-cream);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(45,90,39,0.1);
+  }
+
+  .lang-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    background: transparent;
+    color: var(--text-light);
+  }
+
+  .lang-btn.active {
+    background: var(--primary);
+    color: white;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    box-shadow: 0 4px 15px rgba(45,90,39,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45,90,39,0.35);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid rgba(45,90,39,0.2);
+  }
+
+  .btn-outline:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  /* Mobile menu */
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+
+  .mobile-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  /* ===================== HERO ===================== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(45,90,39,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
+  }
+
+  /* Decorative leaf patterns */
+  .leaf-pattern {
+    position: absolute;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  .leaf-pattern.top-right {
+    top: 100px; right: 60px;
+    width: 300px; height: 300px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 C30 20 5 50 50 95 C95 50 70 20 50 5Z' fill='%232D5A27'/%3E%3C/svg%3E") no-repeat center/contain;
+    animation: float 25s ease-in-out infinite;
+  }
+
+  .hero-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hero-left { animation: slideUp 1s ease-out; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: rgba(45,90,39,0.08);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 28px;
+    border: 1px solid rgba(45,90,39,0.1);
+  }
+
+  .hero-badge .dot {
+    width: 8px; height: 8px;
+    background: var(--primary-light);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  [dir="rtl"] .hero h1 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.5;
+  }
+
+  .hero h1 .highlight {
+    position: relative;
+    color: var(--primary);
+  }
+
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 12px;
+    background: rgba(200,169,110,0.3);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    margin-bottom: 40px;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideUp 1s ease-out 0.3s backwards;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, rgba(45,90,39,0.08), rgba(200,169,110,0.08));
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(45,90,39,0.08);
+  }
+
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(135deg, transparent 40%, rgba(45,90,39,0.05) 60%),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(45,90,39,0.02) 40px, rgba(45,90,39,0.02) 41px),
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(45,90,39,0.02) 40px, rgba(45,90,39,0.02) 41px);
+  }
+
+  .hero-visual-inner {
+    text-align: center;
+    z-index: 1;
+  }
+
+  .hero-visual-icon {
+    font-size: 80px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 4px 20px rgba(45,90,39,0.15));
+  }
+
+  .hero-visual-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* Floating cards on hero visual */
+  .float-card {
+    position: absolute;
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: floatCard 6s ease-in-out infinite;
+    border: 1px solid rgba(45,90,39,0.06);
+  }
+
+  .float-card:nth-child(1) { top: 15%; left: -30px; animation-delay: 0s; }
+  .float-card:nth-child(2) { bottom: 20%; right: -30px; animation-delay: 2s; }
+  .float-card:nth-child(3) { bottom: 10%; left: 10%; animation-delay: 4s; }
+
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .float-card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .float-card-icon.green { background: rgba(45,90,39,0.1); }
+  .float-card-icon.gold { background: rgba(200,169,110,0.15); }
+  .float-card-icon.earth { background: rgba(139,111,71,0.1); }
+
+  .float-card-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .float-card-sub {
+    font-size: 0.7rem;
+    color: var(--text-light);
+  }
+
+  /* ===================== STATS BAR ===================== */
+  .stats-bar {
+    padding: 0 5%;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: white;
+    border-radius: var(--radius);
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(45,90,39,0.06);
+  }
+
+  .stat-item {
+    text-align: center;
+    position: relative;
+  }
+
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background: rgba(45,90,39,0.1);
+  }
+
+  [dir="rtl"] .stat-item:not(:last-child)::after {
+    right: auto;
+    left: -20px;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* ===================== SERVICES ===================== */
+  .services {
+    padding: 120px 5%;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 64px;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(45,90,39,0.06);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  [dir="rtl"] .section-header h2 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .section-header p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+  }
+
+  .services-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 40px 28px;
+    transition: var(--transition);
+    border: 1px solid rgba(45,90,39,0.06);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .service-card:hover::before { opacity: 1; }
+
+  .service-icon {
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 24px;
+    transition: var(--transition);
+  }
+
+  .service-card:nth-child(1) .service-icon { background: rgba(45,90,39,0.08); }
+  .service-card:nth-child(2) .service-icon { background: rgba(200,169,110,0.12); }
+  .service-card:nth-child(3) .service-icon { background: rgba(139,111,71,0.1); }
+  .service-card:nth-child(4) .service-icon { background: rgba(58,125,50,0.08); }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+  }
+
+  [dir="rtl"] .service-card h3 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 1.1rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .service-link:hover { gap: 10px; }
+
+  [dir="rtl"] .service-link .arrow { transform: scaleX(-1); }
+
+  /* ===================== ABOUT ===================== */
+  .about {
+    padding: 100px 5%;
+    background: var(--bg-cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(circle at 10% 50%, rgba(45,90,39,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 90% 30%, rgba(200,169,110,0.06) 0%, transparent 50%);
+  }
+
+  .about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-visual {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .about-visual-text {
+    color: white;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .about-visual-text .emoji { font-size: 64px; margin-bottom: 16px; display: block; }
+  .about-visual-text span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: block;
+  }
+
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+  }
+
+  [dir="rtl"] .about-text h2 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+  }
+
+  .about-text p {
+    color: var(--text-mid);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .about-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .about-feature .check {
+    width: 28px; height: 28px;
+    background: rgba(45,90,39,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .about-feature span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  /* ===================== CONTACT ===================== */
+  .contact {
+    padding: 120px 5%;
+  }
+
+  .contact-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    background: white;
+    border-radius: 24px;
+    padding: 60px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(45,90,39,0.06);
+  }
+
+  .contact-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+  }
+
+  [dir="rtl"] .contact-info h2 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-size: 1.6rem;
+  }
+
+  .contact-info > p {
+    color: var(--text-light);
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .contact-detail-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(45,90,39,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .contact-detail-text strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+  }
+
+  .contact-detail-text span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 14px 18px;
+    border: 1px solid rgba(45,90,39,0.12);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: var(--bg);
+    color: var(--text-dark);
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(45,90,39,0.08);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  /* ===================== FOOTER ===================== */
+  .footer {
+    background: var(--primary-dark);
+    color: rgba(255,255,255,0.8);
+    padding: 80px 5% 40px;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand .logo-text {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .footer-brand .logo-text .ar-name { color: rgba(255,255,255,0.5); }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-col a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition);
+  }
+
+  .footer-col a:hover { color: var(--accent-light); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-content { gap: 40px; }
+    .footer-content { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-center { display: none; }
+    .nav-right .btn { display: none; }
+    .mobile-toggle { display: flex; }
+
+    .hero-content { grid-template-columns: 1fr; text-align: center; }
+    .hero-desc { margin: 0 auto 40px; }
+    .hero-buttons { justify-content: center; }
+    .hero-right { display: none; }
+
+    .stats-inner {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 30px;
+      gap: 24px;
+    }
+
+    .stat-item:not(:last-child)::after { display: none; }
+
+    .services-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+
+    .about-content { grid-template-columns: 1fr; }
+    .about-visual { max-height: 300px; }
+    .about-features { grid-template-columns: 1fr; }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+      padding: 32px;
+    }
+
+    .form-row { grid-template-columns: 1fr; }
+
+    .footer-content { grid-template-columns: 1fr; }
+
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  /* ===================== SCROLL ANIMATIONS ===================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">
+    <img src="logo-banner-dark.png" alt="Aladdin for Project Management" class="logo-banner">
+  </a>
+
+  <div class="nav-center">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" id="navHome">Home</a></li>
+      <li><a href="#services" id="navServices">Services</a></li>
+      <li><a href="#about" id="navAbout">About</a></li>
+      <li><a href="#contact" id="navContact">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="enBtn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="arBtn" onclick="setLang('ar')">ع</button>
+    </div>
+    <a href="#contact" class="btn btn-primary" id="navCta">Get in Touch</a>
+    <button class="mobile-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="leaf-pattern top-right"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span id="heroBadge">Smart Solutions for Sustainable Growth</span>
+      </div>
+      <h1 id="heroTitle">Building the Future of <span class="highlight">Agriculture</span> & Business Management</h1>
+      <p class="hero-desc" id="heroDesc">Aladdin for Project Management delivers integrated solutions across agriculture, project management, asset management, and business consulting — driving efficiency and sustainable growth.</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary" id="heroBtn1">Our Services →</a>
+        <a href="#contact" class="btn btn-outline" id="heroBtn2">Contact Us</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="float-card">
+          <div class="float-card-icon green">🌾</div>
+          <div>
+            <div class="float-card-text" id="fc1Title">Agriculture</div>
+            <div class="float-card-sub" id="fc1Sub">Smart farming solutions</div>
+          </div>
+        </div>
+        <div class="float-card">
+          <div class="float-card-icon gold">📊</div>
+          <div>
+            <div class="float-card-text" id="fc2Title">Project Management</div>
+            <div class="float-card-sub" id="fc2Sub">End-to-end delivery</div>
+          </div>
+        </div>
+        <div class="float-card">
+          <div class="float-card-icon earth">🏗️</div>
+          <div>
+            <div class="float-card-text" id="fc3Title">Asset Management</div>
+            <div class="float-card-sub" id="fc3Sub">Optimize & grow</div>
+          </div>
+        </div>
+        <div class="hero-visual-inner">
+          <img src="logo-banner-dark.png" alt="Aladdin for Project Management" style="width:85%;max-width:400px;border-radius:12px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-bar reveal">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number">150+</div>
+      <div class="stat-label" id="stat1">Projects Completed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">50+</div>
+      <div class="stat-label" id="stat2">Clients Served</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">10+</div>
+      <div class="stat-label" id="stat3">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4</div>
+      <div class="stat-label" id="stat4">Core Sectors</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div class="section-label" id="servicesLabel">What We Do</div>
+    <h2 id="servicesTitle">Comprehensive Solutions Across Industries</h2>
+    <p id="servicesDesc">We bring expertise and innovation to every sector we serve, delivering measurable results for our partners.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🌾</div>
+      <h3 id="svc1Title">Agriculture</h3>
+      <p id="svc1Desc">Modern agricultural solutions including smart farming, crop management, irrigation systems, and sustainable practices for maximized yield and profitability.</p>
+      <a href="#" class="service-link"><span id="svc1Link">Learn More</span> <span class="arrow">→</span></a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📋</div>
+      <h3 id="svc2Title">Project Management</h3>
+      <p id="svc2Desc">End-to-end project management services ensuring timely delivery, cost efficiency, and quality outcomes across all project phases and scales.</p>
+      <a href="#" class="service-link"><span id="svc2Link">Learn More</span> <span class="arrow">→</span></a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏢</div>
+      <h3 id="svc3Title">Asset Management</h3>
+      <p id="svc3Desc">Strategic asset management to optimize portfolio performance, minimize risk, and maximize returns through data-driven decision-making.</p>
+      <a href="#" class="service-link"><span id="svc3Link">Learn More</span> <span class="arrow">→</span></a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">💼</div>
+      <h3 id="svc4Title">Business Management</h3>
+      <p id="svc4Desc">Comprehensive business consulting including strategic planning, operational excellence, financial management, and organizational development.</p>
+      <a href="#" class="service-link"><span id="svc4Link">Learn More</span> <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="about-content">
+    <div class="about-visual reveal">
+      <img src="logo-banner-dark.png" alt="Aladdin for Project Management" style="width:80%;max-width:450px;border-radius:12px;z-index:1;">
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label" id="aboutLabel">About Us</div>
+      <h2 id="aboutTitle">Driving Sustainable Growth Through Expert Management</h2>
+      <p id="aboutDesc1">Aladdin for Project Management is a multi-sector company committed to excellence in agriculture, project management, asset management, and business consulting.</p>
+      <p id="aboutDesc2">With years of experience and a team of industry experts, we help businesses and organizations achieve their goals through innovative, data-driven strategies and hands-on execution.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="check">✓</div>
+          <span id="feat1">Expert Team</span>
+        </div>
+        <div class="about-feature">
+          <div class="check">✓</div>
+          <span id="feat2">Proven Track Record</span>
+        </div>
+        <div class="about-feature">
+          <div class="check">✓</div>
+          <span id="feat3">Data-Driven Approach</span>
+        </div>
+        <div class="about-feature">
+          <div class="check">✓</div>
+          <span id="feat4">Sustainable Practices</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="section-header reveal">
+    <div class="section-label" id="contactLabel">Contact</div>
+    <h2 id="contactTitle">Let's Work Together</h2>
+    <p id="contactDesc">Have a project in mind? We'd love to hear from you. Reach out and let's discuss how we can help.</p>
+  </div>
+
+  <div class="contact-content reveal">
+    <div class="contact-info">
+      <h2 id="contactInfoTitle">Get in Touch</h2>
+      <p id="contactInfoDesc">Ready to transform your business? Contact us for a free consultation.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📧</div>
+        <div class="contact-detail-text">
+          <strong id="emailLabel">Email</strong>
+          <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="046d6a626b44656860606d6a74766b6e616770772a676b69">[email&#160;protected]</a></span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text">
+          <strong id="phoneLabel">Phone</strong>
+          <span>+20 115 666 6001</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <strong id="locationLabel">Location</strong>
+          <span id="locationText">Abd El-Reheem Sabry St, Dokki, Giza, Egypt</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label id="nameLabel">Name</label>
+          <input type="text" placeholder="" id="nameInput" required>
+        </div>
+        <div class="form-group">
+          <label id="emailInputLabel">Email</label>
+          <input type="email" placeholder="" id="emailInput" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label id="subjectLabel">Subject</label>
+        <input type="text" placeholder="" id="subjectInput">
+      </div>
+      <div class="form-group">
+        <label id="messageLabel">Message</label>
+        <textarea placeholder="" id="messageInput" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;justify-content:center;">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <img src="logo-transparent.png" alt="Aladdin Logo" style="width:52px;height:52px;border-radius:50%;object-fit:cover;">
+        <div class="logo-text" style="font-family:'Playfair Display',serif;">
+          Aladdin
+          <span class="ar-name" style="font-family:'Noto Kufi Arabic',sans-serif;">علاء الدين لإدارة المشروعات</span>
+        </div>
+      </div>
+      <p id="footerDesc">Integrated solutions in agriculture, project management, asset management, and business consulting for sustainable growth.</p>
+    </div>
+    <div class="footer-col">
+      <h4 id="footerServices">Services</h4>
+      <ul>
+        <li><a href="#" id="fSvc1">Agriculture</a></li>
+        <li><a href="#" id="fSvc2">Project Management</a></li>
+        <li><a href="#" id="fSvc3">Asset Management</a></li>
+        <li><a href="#" id="fSvc4">Business Management</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 id="footerCompany">Company</h4>
+      <ul>
+        <li><a href="#about" id="fAbout">About Us</a></li>
+        <li><a href="#" id="fCareers">Careers</a></li>
+        <li><a href="#" id="fBlog">Blog</a></li>
+        <li><a href="#contact" id="fContact2">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 id="footerLegal">Legal</h4>
+      <ul>
+        <li><a href="#" id="fPrivacy">Privacy Policy</a></li>
+        <li><a href="#" id="fTerms">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Aladdin for Project Management. All rights reserved.</span>
+    <span>علاء الدين لإدارة المشروعات ©</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ===== LANGUAGE SYSTEM =====
+const translations = {
+  en: {
+    navHome: 'Home', navServices: 'Services', navAbout: 'About', navContact: 'Contact', navCta: 'Get in Touch',
+    heroBadge: 'Smart Solutions for Sustainable Growth',
+    heroTitle: 'Building the Future of <span class="highlight">Agriculture</span> & Business Management',
+    heroDesc: 'Aladdin for Project Management delivers integrated solutions across agriculture, project management, asset management, and business consulting — driving efficiency and sustainable growth.',
+    heroBtn1: 'Our Services →', heroBtn2: 'Contact Us',
+    fc1Title: 'Agriculture', fc1Sub: 'Smart farming solutions',
+    fc2Title: 'Project Management', fc2Sub: 'End-to-end delivery',
+    fc3Title: 'Asset Management', fc3Sub: 'Optimize & grow',
+    stat1: 'Projects Completed', stat2: 'Clients Served', stat3: 'Years Experience', stat4: 'Core Sectors',
+    servicesLabel: 'What We Do', servicesTitle: 'Comprehensive Solutions Across Industries',
+    servicesDesc: 'We bring expertise and innovation to every sector we serve, delivering measurable results for our partners.',
+    svc1Title: 'Agriculture', svc1Desc: 'Modern agricultural solutions including smart farming, crop management, irrigation systems, and sustainable practices for maximized yield and profitability.',
+    svc2Title: 'Project Management', svc2Desc: 'End-to-end project management services ensuring timely delivery, cost efficiency, and quality outcomes across all project phases and scales.',
+    svc3Title: 'Asset Management', svc3Desc: 'Strategic asset management to optimize portfolio performance, minimize risk, and maximize returns through data-driven decision-making.',
+    svc4Title: 'Business Management', svc4Desc: 'Comprehensive business consulting including strategic planning, operational excellence, financial management, and organizational development.',
+    svc1Link: 'Learn More', svc2Link: 'Learn More', svc3Link: 'Learn More', svc4Link: 'Learn More',
+    aboutLabel: 'About Us', aboutTitle: 'Driving Sustainable Growth Through Expert Management', aboutVisual: 'Growing Together',
+    aboutDesc1: 'Aladdin for Project Management is a multi-sector company committed to excellence in agriculture, project management, asset management, and business consulting.',
+    aboutDesc2: 'With years of experience and a team of industry experts, we help businesses and organizations achieve their goals through innovative, data-driven strategies and hands-on execution.',
+    feat1: 'Expert Team', feat2: 'Proven Track Record', feat3: 'Data-Driven Approach', feat4: 'Sustainable Practices',
+    contactLabel: 'Contact', contactTitle: "Let's Work Together", contactDesc: "Have a project in mind? We'd love to hear from you.",
+    contactInfoTitle: 'Get in Touch', contactInfoDesc: 'Ready to transform your business? Contact us for a free consultation.',
+    emailLabel: 'Email', phoneLabel: 'Phone', locationLabel: 'Location', locationText: 'Abd El-Reheem Sabry St, Dokki, Giza, Egypt',
+    nameLabel: 'Name', emailInputLabel: 'Email', subjectLabel: 'Subject', messageLabel: 'Message', submitBtn: 'Send Message',
+    footerDesc: 'Integrated solutions in agriculture, project management, asset management, and business consulting for sustainable growth.',
+    footerServices: 'Services', footerCompany: 'Company', footerLegal: 'Legal',
+    fSvc1: 'Agriculture', fSvc2: 'Project Management', fSvc3: 'Asset Management', fSvc4: 'Business Management',
+    fAbout: 'About Us', fCareers: 'Careers', fBlog: 'Blog', fContact2: 'Contact',
+    fPrivacy: 'Privacy Policy', fTerms: 'Terms of Service'
+  },
+  ar: {
+    navHome: 'الرئيسية', navServices: 'الخدمات', navAbout: 'عن الشركة', navContact: 'تواصل معنا', navCta: 'تواصل معنا',
+    heroBadge: 'حلول ذكية لنمو مستدام',
+    heroTitle: 'نبني مستقبل <span class="highlight">الزراعة</span> وإدارة الأعمال',
+    heroDesc: 'علاء الدين لإدارة المشروعات تقدم حلولاً متكاملة في الزراعة وإدارة المشروعات وإدارة الأصول واستشارات الأعمال — لتحقيق الكفاءة والنمو المستدام.',
+    heroBtn1: 'خدماتنا ←', heroBtn2: 'تواصل معنا',
+    fc1Title: 'الزراعة', fc1Sub: 'حلول زراعية ذكية',
+    fc2Title: 'إدارة المشروعات', fc2Sub: 'تنفيذ شامل',
+    fc3Title: 'إدارة الأصول', fc3Sub: 'تحسين ونمو',
+    stat1: 'مشروع مكتمل', stat2: 'عميل نخدمهم', stat3: 'سنوات خبرة', stat4: 'قطاعات رئيسية',
+    servicesLabel: 'ماذا نفعل', servicesTitle: 'حلول شاملة عبر القطاعات',
+    servicesDesc: 'نقدم الخبرة والابتكار في كل قطاع نخدمه، ونحقق نتائج قابلة للقياس لشركائنا.',
+    svc1Title: 'الزراعة', svc1Desc: 'حلول زراعية حديثة تشمل الزراعة الذكية وإدارة المحاصيل وأنظمة الري والممارسات المستدامة لتحقيق أقصى إنتاجية وربحية.',
+    svc2Title: 'إدارة المشروعات', svc2Desc: 'خدمات إدارة مشروعات شاملة تضمن التسليم في الوقت المحدد وكفاءة التكلفة وجودة النتائج عبر جميع مراحل المشروع.',
+    svc3Title: 'إدارة الأصول', svc3Desc: 'إدارة أصول استراتيجية لتحسين أداء المحفظة وتقليل المخاطر وتعظيم العوائد من خلال اتخاذ قرارات مبنية على البيانات.',
+    svc4Title: 'إدارة الأعمال', svc4Desc: 'استشارات أعمال شاملة تشمل التخطيط الاستراتيجي والتميز التشغيلي والإدارة المالية والتطوير التنظيمي.',
+    svc1Link: 'اعرف المزيد', svc2Link: 'اعرف المزيد', svc3Link: 'اعرف المزيد', svc4Link: 'اعرف المزيد',
+    aboutLabel: 'عن الشركة', aboutTitle: 'قيادة النمو المستدام من خلال الإدارة المتخصصة', aboutVisual: 'ننمو معاً',
+    aboutDesc1: 'علاء الدين لإدارة المشروعات شركة متعددة القطاعات ملتزمة بالتميز في الزراعة وإدارة المشروعات وإدارة الأصول واستشارات الأعمال.',
+    aboutDesc2: 'بفضل سنوات من الخبرة وفريق من خبراء الصناعة، نساعد الشركات والمؤسسات على تحقيق أهدافها من خلال استراتيجيات مبتكرة مبنية على البيانات وتنفيذ عملي.',
+    feat1: 'فريق متخصص', feat2: 'سجل حافل بالنجاح', feat3: 'نهج مبني على البيانات', feat4: 'ممارسات مستدامة',
+    contactLabel: 'تواصل', contactTitle: 'لنعمل معاً', contactDesc: 'هل لديك مشروع في ذهنك؟ نود أن نسمع منك.',
+    contactInfoTitle: 'تواصل معنا', contactInfoDesc: 'مستعد لتحويل أعمالك؟ تواصل معنا لاستشارة مجانية.',
+    emailLabel: 'البريد الإلكتروني', phoneLabel: 'الهاتف', locationLabel: 'الموقع', locationText: 'شارع عبد الرحيم صبري، الدقي، الجيزة، مصر',
+    nameLabel: 'الاسم', emailInputLabel: 'البريد الإلكتروني', subjectLabel: 'الموضوع', messageLabel: 'الرسالة', submitBtn: 'إرسال الرسالة',
+    footerDesc: 'حلول متكاملة في الزراعة وإدارة المشروعات وإدارة الأصول واستشارات الأعمال لتحقيق النمو المستدام.',
+    footerServices: 'الخدمات', footerCompany: 'الشركة', footerLegal: 'قانوني',
+    fSvc1: 'الزراعة', fSvc2: 'إدارة المشروعات', fSvc3: 'إدارة الأصول', fSvc4: 'إدارة الأعمال',
+    fAbout: 'عن الشركة', fCareers: 'الوظائف', fBlog: 'المدونة', fContact2: 'تواصل',
+    fPrivacy: 'سياسة الخصوصية', fTerms: 'شروط الخدمة'
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const html = document.documentElement;
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  html.setAttribute('lang', lang);
+
+  document.getElementById('enBtn').classList.toggle('active', lang === 'en');
+  document.getElementById('arBtn').classList.toggle('active', lang === 'ar');
+
+  const t = translations[lang];
+  for (const [id, text] of Object.entries(t)) {
+    const el = document.getElementById(id);
+    if (el) {
+      if (id === 'heroTitle') { el.innerHTML = text; }
+      else { el.textContent = text; }
+    }
+  }
+  // WhatsApp tooltip
+  document.getElementById('waTooltip').textContent = lang === 'ar' ? 'تواصل معنا' : 'Chat with us';
+}
+
+// ===== NAVBAR SCROLL =====
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  const nav = document.querySelector('.nav-center');
+  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== FORM SUBMIT =====
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = currentLang === 'ar' ? 'تم الإرسال ✓' : 'Sent ✓';
+  btn.style.background = 'var(--primary-light)';
+  setTimeout(() => {
+    btn.textContent = translations[currentLang].submitBtn;
+    btn.style.background = '';
+    e.target.reset();
+  }, 2500);
+}
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/2001156666001" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span class="whatsapp-tooltip" id="waTooltip">Chat with us</span>
+</a>
+
+<style>
+  .whatsapp-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 999;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  [dir="rtl"] .whatsapp-btn {
+    right: auto;
+    left: 28px;
+  }
+
+  .whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+  }
+
+  .whatsapp-tooltip {
+    position: absolute;
+    right: 72px;
+    background: white;
+    color: var(--text-dark);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  [dir="rtl"] .whatsapp-tooltip {
+    right: auto;
+    left: 72px;
+  }
+
+  .whatsapp-btn:hover .whatsapp-tooltip {
+    opacity: 1;
+  }
+</style>
+
+</body>
+</html>
